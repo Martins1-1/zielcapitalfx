@@ -555,14 +555,14 @@ const Dashboard = ({ setIsAuthenticated }: DashboardProps): JSX.Element => {
                       <div className="mb-4">
                         <span className="font-semibold">Pay to:</span>
                         <div className="flex items-center gap-2 mt-2">
-                          <span className="font-mono select-all">{fundMethod === 'bitcoin' ? 'bc1qs6htjud525973zpz5e4zduxkrkwlhcm2dfx7sv' : 'TMjBYxYEbNFut9WbRWoZd1hLPzYhLQZ78U'}</span>
-                          <button className="btn btn-xs btn-outline" onClick={() => navigator.clipboard.writeText(fundMethod === 'bitcoin' ? 'bc1qs6htjud525973zpz5e4zduxkrkwlhcm2dfx7sv' : 'TMjBYxYEbNFut9WbRWoZd1hLPzYhLQZ78U')}>Copy</button>
+                          <span className="font-mono select-all">{fundMethod === 'bitcoin' ? 'bc1qmwghyyq4377xux8qeldxgl60v852luaw067pg7' : 'TMjBYxYEbNFut9WbRWoZd1hLPzYhLQZ78U'}</span>
+                          <button className="btn btn-xs btn-outline" onClick={() => navigator.clipboard.writeText(fundMethod === 'bitcoin' ? 'bc1qmwghyyq4377xux8qeldxgl60v852luaw067pg7' : 'TMjBYxYEbNFut9WbRWoZd1hLPzYhLQZ78U')}>Copy</button>
                         </div>
                         <div className="mt-2"><span className="font-semibold">NETWORK:</span> {fundMethod === 'bitcoin' ? 'BTC' : 'TRON (Tron wallet)'}</div>
                       </div>
                       <div className="mb-4">
                         <span className="font-semibold">QR CODE:</span>
-                        <div className="mt-2 mb-2"><img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(fundMethod === 'bitcoin' ? 'bc1qs6htjud525973zpz5e4zduxkrkwlhcm2dfx7sv' : 'TMjBYxYEbNFut9WbRWoZd1hLPzYhLQZ78U')}`} alt="QR Code" /></div>
+                        <div className="mt-2 mb-2"><img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(fundMethod === 'bitcoin' ? 'bc1qmwghyyq4377xux8qeldxgl60v852luaw067pg7' : 'TMjBYxYEbNFut9WbRWoZd1hLPzYhLQZ78U')}`} alt="QR Code" /></div>
                         <p className="text-xs text-gray-600">If the QR code doesn't work with your wallet, simply copy and paste the address displayed above.</p>
                       </div>
                       <div className="mb-4">
