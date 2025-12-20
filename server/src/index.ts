@@ -31,7 +31,9 @@ app.use(cors({
     'http://localhost:3000',
     'http://localhost:3002',
     'https://novalcapital.vercel.app',
-    'https://novalcapital.org'
+    'https://novalcapital.org',
+    'https://zielcapital.org',
+    'https://www.zielcapital.org'
   ],
   credentials: true
 }));
