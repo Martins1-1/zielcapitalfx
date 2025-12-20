@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ticker utilities */
+@layer utilities {
+  .ticker { overflow: hidden; position: relative; }
+  .ticker__track { display: inline-flex; white-space: nowrap; will-change: transform; animation: ticker-scroll 30s linear infinite; }
+  .ticker:hover .ticker__track { animation-play-state: paused; }
+}
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Legacy Fonts */
+@font-face {
+  font-family: "Merriweather";
+  font-style: normal;
+  font-weight: 900;
+  src: local(""), url("/fonts/merriweather-v30-latin-900.woff2") format("woff2"), url("/fonts/merriweather-v30-latin-900.woff") format("woff");
+  font-display: block;
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 300;
+  src: local(""), url("/fonts/poppins-v20-latin-300.woff2") format("woff2"), url("/fonts/poppins-v20-latin-300.woff") format("woff");
+  font-display: block;
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  src: local(""), url("/fonts/poppins-v20-latin-regular.woff2") format("woff2"), url("/fonts/poppins-v20-latin-regular.woff") format("woff");
+  font-display: block;
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  src: local(""), url("/fonts/poppins-v20-latin-700.woff2") format("woff2"), url("/fonts/poppins-v20-latin-700.woff") format("woff");
+  font-display: block;
+}
+
+:root {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light;
+}
+
+/* Global zoom-out: reduce base font-size so the whole UI appears smaller */
+:root {
+  font-size: 14px; /* slightly smaller than default */
+}
+
+/* Zoom-out adjustments for medium screens */
+@media (max-width: 1024px) {
+  :root { font-size: 13px; }
+}
+
+/* Consolidated mobile rules for max-width:640px */
+@media (max-width: 640px) {
+  /* Aggressive zoom-out on small screens */
+  :root { font-size: 11px; }
+
+  /* Make container full width and add small padding so header/widget/footer align with dashboard tabs */
+  .container { max-width: 100% !important; padding-left: 1rem !important; padding-right: 1rem !important; }
+
+  .dashboard-tabs-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .dashboard-tabs-nav button { flex: 1 1 auto; text-align: center; padding: 0.5rem 0.75rem; }
+
+  /* Ensure images and widgets do not exceed viewport width */
+  img, .tradingview-widget-container, .tradingview-widget-container * {
+    max-width: 100%;
+    height: auto !important;
+  }
+
+  /* Make wide tables wrap text instead of overflowing and reduce font-size slightly */
+  table { display: block; width: 100%; overflow: visible; font-size: 0.85rem; }
+  th, td { white-space: normal; word-break: break-word; }
+
+  /* Reduce card padding on mobile to free up space */
+  .card { padding: 0.75rem; }
+
+  /* Tighter buttons on mobile */
+  .btn { padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 0.4rem; padding-bottom: 0.4rem; font-size: 0.85rem; }
+
+  /* Headings scale down on mobile for better balance */
+  h1 { font-size: 1.125rem; }
+  h2 { font-size: 1rem; }
+  h3 { font-size: 0.95rem; }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #F5F7F9;
+  color: #333333;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Merriweather', sans-serif;
+  font-weight: 900;
+  color: #0c385f;
+  line-height: 1.2;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-5 py-3 rounded-lg font-bold text-xs transition-all duration-150;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white border border-primary;
+  }
+  
+  .btn-primary:hover {
+    @apply bg-primary-light text-heading border-primary-dark;
+  }
+  
+  .btn-info {
+    @apply bg-info text-white border border-info;
+  }
+  
+  .btn-info:hover {
+    @apply bg-info-light;
+  }
+  
+  .btn-warning {
+    @apply bg-warning text-gray-900 border border-warning;
+  }
+  
+  .btn-warning:hover {
+    @apply bg-warning-light;
+  }
+  
+  .btn-success {
+    @apply bg-success text-white border border-success;
+  }
+  
+  .btn-success:hover {
+    @apply bg-success-light;
+  }
+  
+  .btn-danger {
+    @apply bg-danger text-white border border-danger;
+  }
+  
+  .btn-link {
+    @apply text-link hover:text-info-dark bg-transparent border-transparent;
+  }
+  
+  .card {
+    @apply bg-white rounded-none border border-border overflow-hidden;
+    padding: 1.75rem;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-400 hover:bg-white;
+    background-color: transparent;
+    border-color: #dedede;
+  }
+  
+  .card-shadow {
+    @apply border-0 shadow-card;
+  }
+  
+  .badge-up {
+    @apply bg-green-500 text-white px-2 py-1 rounded text-sm;
+  }
+  
+  .badge-down {
+    @apply bg-red-500 text-white px-2 py-1 rounded text-sm;
+  }
+
+  /* Standard section heading used across dashboard pages */
+  .section-heading {
+    @apply text-xl md:text-2xl font-bold mb-6 tracking-tight;
+  }
+}
+
+/* Responsive table helpers: make tables align and wrap consistently */
+@layer utilities {
+  .responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* distribute column widths evenly */
+  }
+
+  .responsive-table th, .responsive-table td {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal; /* allow wrapping */
+    padding: 0.5rem 0.5rem;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 640px) {
+    .responsive-table th, .responsive-table td { font-size: 0.78rem; padding: 0.4rem 0.4rem; }
+  }
+}
