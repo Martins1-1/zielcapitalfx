@@ -263,19 +263,19 @@ const Dashboard = ({ setIsAuthenticated }: DashboardProps): JSX.Element => {
                       }
                     }}>Refresh</button>
                   </div>
-                  <div className="text-3xl font-bold text-primary">$<span>{balance.toLocaleString()}</span></div>
+                  <div className="text-3xl font-bold text-primary">${balance.toLocaleString()}</div>
                 </div>
                 <div className="card p-6">
                   <div className="text-gray-600 mb-2">Total Invested</div>
-                  <div className="text-3xl font-bold text-gray-900">$<span>{totalInvested.toLocaleString()}</span></div>
+                  <div className="text-3xl font-bold text-gray-900">${totalInvested.toLocaleString()}</div>
                 </div>
                 <div className="card p-6">
                   <div className="text-gray-600 mb-2">Current Value</div>
-                  <div className="text-3xl font-bold text-green-600">$<span>{isNaN(totalCurrentValue) ? 0 : totalCurrentValue.toLocaleString()}</span></div>
+                  <div className="text-3xl font-bold text-green-600">${isNaN(totalCurrentValue) ? 0 : totalCurrentValue.toLocaleString()}</div>
                 </div>
                 <div className="card p-6">
                   <div className="text-gray-600 mb-2">Total Profit</div>
-                  <div className={`text-3xl font-bold ${totalProfit >= 0 ? 'text-green-600' : 'text-red-600'}`}>$<span>{isNaN(totalProfit) ? 0 : totalProfit.toLocaleString()}</span> (<span>{isNaN(totalProfitPercentage) ? 0 : totalProfitPercentage.toFixed(2)}</span>%)</div>
+                  <div className={`text-3xl font-bold ${totalProfit >= 0 ? 'text-green-600' : 'text-red-600'}`}>${isNaN(totalProfit) ? 0 : totalProfit.toLocaleString()} ({isNaN(totalProfitPercentage) ? 0 : totalProfitPercentage.toFixed(2)}%)</div>
                 </div>
               </div>
               {/* Tabs and Tab Content */}
@@ -306,11 +306,11 @@ const Dashboard = ({ setIsAuthenticated }: DashboardProps): JSX.Element => {
                                   <div>
                                     <div className="font-medium">{inv.planName}</div>
                                     <div className="text-sm text-gray-600 capitalize">{inv.planType}</div>
-                                    <div className="text-xs text-gray-500">User: <span>{inv.user?.fullName || inv.user?.email || inv.userId || 'N/A'}</span></div>
+                                    <div className="text-xs text-gray-500">User: {inv.user?.fullName || inv.user?.email || inv.userId || 'N/A'}</div>
                                   </div>
                                   <div className="text-right">
-                                    <div className="font-semibold">$<span>{isNaN(inv.currentValue) ? 0 : inv.currentValue.toLocaleString()}</span></div>
-                                    <div className={`text-sm ${inv.profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>{inv.profit >= 0 ? '+' : ''}<span>{isNaN(inv.profitPercentage) ? 0 : inv.profitPercentage.toFixed(2)}</span>%</div>
+                                    <div className="font-semibold">${isNaN(inv.currentValue) ? 0 : inv.currentValue.toLocaleString()}</div>
+                                    <div className={`text-sm ${inv.profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>{inv.profit >= 0 ? '+' : ''}{isNaN(inv.profitPercentage) ? 0 : inv.profitPercentage.toFixed(2)}%</div>
                                   </div>
                                 </div>
                               ))}
@@ -325,10 +325,10 @@ const Dashboard = ({ setIsAuthenticated }: DashboardProps): JSX.Element => {
                             {investments.slice(-5).reverse().map((inv) => (
                               <div key={inv.id} className="flex items-center justify-between p-3 border-l-4 border-info bg-gray-50">
                                 <div>
-                                  <div className="font-medium">Invested in <span>{inv.planName}</span></div>
+                                  <div className="font-medium">Invested in {inv.planName}</div>
                                   <div className="text-sm text-gray-600">{new Date(inv.startDate).toLocaleDateString()}</div>
                                 </div>
-                                <div className="font-semibold text-primary">$<span>{inv.investedAmount.toLocaleString()}</span></div>
+                                <div className="font-semibold text-primary">${inv.investedAmount.toLocaleString()}</div>
                               </div>
                             ))}
                             {investments.length === 0 && (<p className="text-gray-600">No recent activity</p>)}
