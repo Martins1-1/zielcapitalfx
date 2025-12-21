@@ -30,12 +30,10 @@ function App() {
     // Show splash for at least 1s for effect
     const timer = setTimeout(() => setAppLoading(false), 1000);
     // Load Tawk once for the whole SPA (skip on localhost)
-    /*
     if (typeof window !== 'undefined' && !/localhost|127\.0\.0\.1/.test(window.location.hostname)) {
       // widget id/path (same value used in pages)
-      loadTawk('693279e5cf610a197f635280/1jbmioato');
+      loadTawk('6947dc8d76966c197e6ea963/1jd0bb31m');
     }
-    */
     return () => clearTimeout(timer);
   }, []);
 

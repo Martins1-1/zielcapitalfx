@@ -37,7 +37,10 @@ function TradingViewWidget() {
       "width": "100%",
       "height": "600"
     }`;
-    if (container.current) container.current.appendChild(script);
+    if (container.current) {
+      container.current.innerHTML = '';
+      container.current.appendChild(script);
+    }
   }, []);
 
   const [loadFailed, setLoadFailed] = useState(false);
@@ -45,20 +48,19 @@ function TradingViewWidget() {
   return (
     <div
       className="tradingview-widget-container"
-      ref={container}
       style={{
         width: '100%',
         margin: '0 auto',
         background: '#0F0F0F',
         borderRadius: '12px',
         boxShadow: '0 2px 16px rgba(0,0,0,0.12)',
-        marginBottom: '48px', // Add extra space below widget
-        minHeight: '600px', // Ensure enough height for widget
-        maxHeight: '700px', // Prevent excessive height
+        marginBottom: '48px',
+        minHeight: '300px',
+        maxHeight: '400px',
         overflow: 'auto',
       }}
     >
-      <div className="tradingview-widget-container__widget"></div>
+      <div className="tradingview-widget-container__widget" ref={container}></div>
       {loadFailed && (
         <div style={{ padding: 12, color: '#fff', textAlign: 'center' }}>Forex market widget failed to load.</div>
       )}

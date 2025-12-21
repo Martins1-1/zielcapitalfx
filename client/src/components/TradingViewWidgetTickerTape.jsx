@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, memo, useState } from 'react';
+﻿import React, { useEffect, useRef, memo, useState } from 'react';
 
 function TradingViewWidgetTickerTape() {
   const container = useRef(null);
@@ -18,7 +18,7 @@ function TradingViewWidgetTickerTape() {
     script.async = true;
     script.onload = onLoad;
     script.onerror = onError;
-    script.innerHTML = `{
+    script.innerHTML = {
       "symbols": [
         { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500 Index" },
         { "proName": "FOREXCOM:NSXUSD", "title": "US 100 Cash CFD" },
@@ -32,15 +32,15 @@ function TradingViewWidgetTickerTape() {
       "isTransparent": false,
       "showSymbolLogo": true,
       "displayMode": "adaptive"
-    }`;
+    };
     if (container.current) container.current.appendChild(script);
   }, []);
 
   const [loadFailed, setLoadFailed] = useState(false);
 
   return (
-    <div className="tradingview-widget-container" ref={container} style={{ width: '100%', margin: '0 auto', background: '#0f0f0f', borderRadius: '12px', boxShadow: '0 2px 16px rgba(0,0,0,0.12)', marginBottom: '32px', minHeight: '60px', maxHeight: '80px', overflow: 'auto' }}>
-      <div className="tradingview-widget-container__widget"></div>
+    <div className="tradingview-widget-container" style={{ width: '100%', margin: '0 auto', background: '#0f0f0f', borderRadius: '12px', boxShadow: '0 2px 16px rgba(0,0,0,0.12)', marginBottom: '32px', minHeight: '60px', maxHeight: '80px', overflow: 'auto' }}>
+      <div className="tradingview-widget-container__widget" ref={container}></div>
       {loadFailed && (
         <div style={{ padding: 8, color: '#fff', textAlign: 'center' }}>Ticker tape failed to load.</div>
       )}

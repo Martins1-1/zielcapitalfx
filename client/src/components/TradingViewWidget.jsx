@@ -109,7 +109,6 @@ function TradingViewWidget() {
   return (
     <div
       className="tradingview-widget-container"
-      ref={container}
       style={{
         width: '100%',
         margin: '0 auto',
@@ -122,7 +121,7 @@ function TradingViewWidget() {
         overflow: 'hidden',
       }}
     >
-      <div className="tradingview-widget-container__widget"></div>
+      <div className="tradingview-widget-container__widget" ref={container}></div>
       {loadFailed && (
         <div style={{ padding: 12, color: '#fff', textAlign: 'center' }}>
           Market widget failed to load. Please check network or TradingView embed availability.

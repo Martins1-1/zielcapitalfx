@@ -61,7 +61,7 @@ const Contact = () => {
                     <img src="/img/in-cirro-2-icon-1.svg" alt="Email" className="w-8 h-8 mr-4" />
                     <div>
                       <h3 className="font-semibold mb-1">Email</h3>
-                      <p className="text-gray-600">novalcapital@novalcapital.org</p>
+                      <p className="text-gray-600">Support@zielcapital.org</p>
                     </div>
                   </div>
 
@@ -69,7 +69,7 @@ const Contact = () => {
                     <img src="/img/in-cirro-2-icon-6.svg" alt="Phone" className="w-8 h-8 mr-4" />
                     <div>
                       <h3 className="font-semibold mb-1">Phone</h3>
-                      <p className="text-gray-600">+1 (800) 123-4567</p>
+                      <p className="text-gray-600">+44 7999 914790</p>
                     </div>
                   </div>
 
