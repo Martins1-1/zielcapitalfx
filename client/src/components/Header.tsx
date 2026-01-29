@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface HeaderProps {
   isAuthenticated?: boolean;
@@ -7,6 +7,47 @@ interface HeaderProps {
 
 const Header = ({ isAuthenticated }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [locale, setLocale] = useState('en');
+  const [isLangOpen, setIsLangOpen] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('locale');
+      if (saved) setLocale(saved);
+      document.documentElement.lang = saved || 'en';
+    } catch (e) {
+      // ignore
+    }
+  }, []);
+
+  const changeLocale = (lang: string) => {
+    setLocale(lang);
+    try { localStorage.setItem('locale', lang); } catch (e) {}
+    document.documentElement.lang = lang;
+    setIsLangOpen(false);
+
+    // Try to trigger Google Translate widget to change language.
+    try {
+      const combo = document.querySelector('.goog-te-combo') as HTMLSelectElement | null;
+      if (combo) {
+        combo.value = lang;
+        combo.dispatchEvent(new Event('change'));
+        return;
+      }
+
+      // Fallback: set googtrans cookie and reload to apply translation
+      document.cookie = `googtrans=/en/${lang};path=/`;
+      // Some setups need a reload to pick up the cookie; attempt a soft trigger first
+      const frame = document.querySelector('iframe.goog-te-banner-frame');
+      if (frame && (frame as HTMLIFrameElement).contentWindow) {
+        (frame as HTMLIFrameElement).contentWindow!.location.reload();
+      } else {
+        window.location.reload();
+      }
+    } catch (e) {
+      // ignore failures
+    }
+  };
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-border">
@@ -39,6 +80,22 @@ const Header = ({ isAuthenticated }: HeaderProps) => {
                 <Link to="/roadmap" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Roadmap</Link>
                 <Link to="/legal-docs" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Legal Docs</Link>
               </div>
+            </div>
+          </div>
+
+          {/* Language selector */}
+          <div className="hidden lg:flex items-center mr-4">
+            <div className="relative">
+              <button onClick={() => setIsLangOpen(!isLangOpen)} className="text-gray-700 hover:text-primary transition px-3 py-2 rounded-md border border-transparent hover:border-gray-200">
+                {locale === 'en' ? 'English' : locale === 'es' ? 'Spanish' : 'French'}
+              </button>
+              {isLangOpen && (
+                <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg">
+                  <button onClick={() => changeLocale('en')} className="w-full text-left px-4 py-2 hover:bg-gray-100">English</button>
+                  <button onClick={() => changeLocale('es')} className="w-full text-left px-4 py-2 hover:bg-gray-100">Spanish</button>
+                  <button onClick={() => changeLocale('fr')} className="w-full text-left px-4 py-2 hover:bg-gray-100">French</button>
+                </div>
+              )}
             </div>
           </div>
 
@@ -77,6 +134,15 @@ const Header = ({ isAuthenticated }: HeaderProps) => {
             <Link to="/customers" className="block py-2 text-gray-700 hover:text-primary">Customers</Link>
             <Link to="/roadmap" className="block py-2 text-gray-700 hover:text-primary">Roadmap</Link>
             <Link to="/legal-docs" className="block py-2 text-gray-700 hover:text-primary">Legal Docs</Link>
+            {/* Mobile language options */}
+            <div className="mt-3 px-4">
+              <div className="text-sm font-semibold text-gray-600">Language</div>
+              <div className="mt-2 space-y-1">
+                <button onClick={() => changeLocale('en')} className="w-full text-left py-2">English</button>
+                <button onClick={() => changeLocale('es')} className="w-full text-left py-2">Spanish</button>
+                <button onClick={() => changeLocale('fr')} className="w-full text-left py-2">French</button>
+              </div>
+            </div>
             {isAuthenticated ? (
               <Link to="/dashboard" className="block mt-4 btn btn-info w-full">Dashboard</Link>
             ) : (
