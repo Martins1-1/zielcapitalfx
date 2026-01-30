@@ -84,16 +84,17 @@ const Header = ({ isAuthenticated }: HeaderProps) => {
           </div>
 
           {/* Language selector */}
-          <div className="hidden lg:flex items-center mr-4">
+          <div className="flex items-center mr-2 lg:mr-4">
             <div className="relative">
-              <button onClick={() => setIsLangOpen(!isLangOpen)} className="text-gray-700 hover:text-primary transition px-3 py-2 rounded-md border border-transparent hover:border-gray-200">
+              <button onClick={() => setIsLangOpen(!isLangOpen)} className="text-gray-700 hover:text-primary transition px-3 py-2 rounded-md border border-transparent hover:border-gray-200 text-sm lg:text-base">
                 {locale === 'en' ? 'English' : locale === 'es' ? 'Spanish' : 'French'}
+                <i className="fas fa-chevron-down ml-2 text-xs"></i>
               </button>
               {isLangOpen && (
-                <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg">
-                  <button onClick={() => changeLocale('en')} className="w-full text-left px-4 py-2 hover:bg-gray-100">English</button>
-                  <button onClick={() => changeLocale('es')} className="w-full text-left px-4 py-2 hover:bg-gray-100">Spanish</button>
-                  <button onClick={() => changeLocale('fr')} className="w-full text-left px-4 py-2 hover:bg-gray-100">French</button>
+                <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg border border-gray-100 z-50">
+                  <button onClick={() => changeLocale('en')} className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">English</button>
+                  <button onClick={() => changeLocale('es')} className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">Spanish</button>
+                  <button onClick={() => changeLocale('fr')} className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">French</button>
                 </div>
               )}
             </div>
@@ -134,15 +135,6 @@ const Header = ({ isAuthenticated }: HeaderProps) => {
             <Link to="/customers" className="block py-2 text-gray-700 hover:text-primary">Customers</Link>
             <Link to="/roadmap" className="block py-2 text-gray-700 hover:text-primary">Roadmap</Link>
             <Link to="/legal-docs" className="block py-2 text-gray-700 hover:text-primary">Legal Docs</Link>
-            {/* Mobile language options */}
-            <div className="mt-3 px-4">
-              <div className="text-sm font-semibold text-gray-600">Language</div>
-              <div className="mt-2 space-y-1">
-                <button onClick={() => changeLocale('en')} className="w-full text-left py-2">English</button>
-                <button onClick={() => changeLocale('es')} className="w-full text-left py-2">Spanish</button>
-                <button onClick={() => changeLocale('fr')} className="w-full text-left py-2">French</button>
-              </div>
-            </div>
             {isAuthenticated ? (
               <Link to="/dashboard" className="block mt-4 btn btn-info w-full">Dashboard</Link>
             ) : (
