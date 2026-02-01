@@ -466,7 +466,7 @@ const Dashboard = ({ setIsAuthenticated }: DashboardProps): JSX.Element => {
                       <select value={fundMethod} onChange={e => setFundMethod(e.target.value as 'bitcoin' | 'bnb')} className="w-full mb-4 px-4 py-2 border rounded">
                         <option value="">Choose...</option>
                         <option value="bitcoin">Bitcoin</option>
-                        <option value="bnb">TRON (Tron wallet)</option>
+                        {/* <option value="bnb">TRON (Tron wallet)</option> */}
                       </select>
                       <label className="block mb-2 font-medium">Currency Type</label>
                       <select value={fundCurrency} onChange={e => setFundCurrency(e.target.value as 'dollars' | 'euro' | 'pound')} className="w-full mb-4 px-4 py-2 border rounded">
